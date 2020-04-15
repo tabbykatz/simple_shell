@@ -55,6 +55,7 @@ char *_strtok(char *input, char *delim);
 char *_strchr(char *s, char c);
 void _puts(char *str);
 void puts_prompt(void);
+int _putchar(char c);
 
 /* cmd_handler */
 int cmd_handler(char **argv, env_list_t **env);
