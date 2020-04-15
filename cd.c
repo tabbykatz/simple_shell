@@ -22,9 +22,7 @@ void _cd(char **argv, env_list_t **env)
 	PWD[3] = NULL;
 
 	getcwd(buf, sizeof(buf));
-	printf("Current dir: %s\n", buf);
 
-	printf("Changing to %s\n", argv[1]);
 
 	if (argv[1] && _strcmp(argv[1], "~"))
 		chdir(argv[1]);
@@ -34,7 +32,6 @@ void _cd(char **argv, env_list_t **env)
 	_setenv_list(OLDPWD, env);
 
 	getcwd(buf, sizeof(buf));
-	printf("Current dir is now: %s, %d bytes\n", buf, _strlen(buf));
 	_setenv_list(PWD, env);
 	free(OLDPWD);
 	free(PWD);
