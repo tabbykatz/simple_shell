@@ -18,7 +18,7 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			printf("ShiP$ ");
+			puts_prompt();
 		getline_size = getline(&line, &line_size, stdin);
 		if (getline_size == -1)
 		{
