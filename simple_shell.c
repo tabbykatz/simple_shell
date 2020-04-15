@@ -1,9 +1,14 @@
 #include "shell.h"
+
+int line_count = 1;
+int *LINE_COUNT = &line_count;
+char *fnc_name;
+char **FNC_NAME = &fnc_name;
 /**
   * main - entry point
   * Return: 0
   */
-int main(void)
+int main(__attribute__((unused))int ac, char **av)
 {
 	int exit_status = 0, last_return = 1, i;
 	size_t line_size = 0;
@@ -13,6 +18,7 @@ int main(void)
 	order_t **ops = malloc(sizeof(order_t *));
 	order_t *a;
 
+	*FNC_NAME = av[0];
 	env = _initenv_list();
 	signal(SIGINT, do_nothing);
 	while (1)
@@ -64,7 +70,7 @@ int main(void)
 			}
 			else
 				last_return = 1;
-			/* printf("LN: %d", LINE_COUNT); */
+			*LINE_COUNT += 1;
 			/* balance malloc() from get_tokens_strtok.c:26 */
 			FREE(argv);
 		}

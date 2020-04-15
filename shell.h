@@ -93,4 +93,6 @@ char **_get_cmds(char *line, order_t **ops);
 void free_ops(order_t **ops);
 
 extern char **environ;
+extern int *LINE_COUNT;
+extern char **FNC_NAME;
 #endif /* SHELL */

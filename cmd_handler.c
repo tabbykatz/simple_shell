@@ -67,7 +67,7 @@ int cmd_handler(char **argv, env_list_t **env)
 	}
 	if (!path_to_file)
 	{
-		printf("%s: command not found\n", argv[0]);
+		printf("%d: %s: not found\n", *LINE_COUNT, argv[0]);
 		double_free(str_env);
 		return (0);
 	}

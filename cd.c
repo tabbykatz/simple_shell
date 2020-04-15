@@ -35,8 +35,8 @@ void _cd(char **argv, env_list_t **env)
 		}
 		else
 		{
-			printf("-bash: cd: ");
-			printf("%s: No such directory found\n", argv[1]);
+			printf("%s: %d: cd: ", *FNC_NAME, *LINE_COUNT);
+			printf("can't cd to %s\n", argv[1]);
 		}
 	}
 	else
