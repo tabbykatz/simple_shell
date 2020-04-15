@@ -49,6 +49,8 @@ env_list_t *_getenv_list_node(char *name, env_list_t **env)
   */
 void _setenv_list(char **argv, env_list_t **env)
 {
+	if (!argv[1] || !argv[2])
+		return;
 	env_list_t *a = _getenv_list_node(argv[1], env), *b;
 
 	if (a)
@@ -78,6 +80,8 @@ void _setenv_list(char **argv, env_list_t **env)
   */
 void _unsetenv_list(char **argv, env_list_t **env)
 {
+	if (!argv[1])
+		return;
 	env_list_t *a = *env, *b = *env;
 
 	while (a)
