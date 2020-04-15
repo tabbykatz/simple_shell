@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
   * built_in_handler - handles built in fncs
   * @argv: argument vector
@@ -24,7 +23,6 @@ void built_in_handler(char **argv, env_list_t **env, int i)
 			break;
 	}
 }
-
 /**
   * cmd_handler - handles all commands
   * @argv: argument vector
@@ -39,8 +37,7 @@ int cmd_handler(char **argv, env_list_t **env)
 	char *path_to_file = NULL;
 	pid_t child_pid;
 	char **str_env = _get_str_env(env);
-
-	/* if it's a buitin */
+	
 	for (i = 0; built_ins[i]; i++)
 	{
 		if (!_strcmp(built_ins[i], argv[0]))
@@ -50,10 +47,6 @@ int cmd_handler(char **argv, env_list_t **env)
 			return (1);
 		}
 	}
-
-	/* if it's a full-path cmd */
-	/* else if it can be found in the PATH */
-	/* else it must not be a cmd */
 	if (stat(argv[0], &st) == 0)
 		path_to_file = argv[0];
 	else
@@ -71,7 +64,6 @@ int cmd_handler(char **argv, env_list_t **env)
 		double_free(str_env);
 		return (0);
 	}
-
 	child_pid = fork();
 	if (child_pid == -1)
 	{
