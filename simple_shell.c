@@ -64,6 +64,7 @@ int main(void)
 			}
 			else
 				last_return = 1;
+			/* printf("LN: %d", LINE_COUNT); */
 			/* balance malloc() from get_tokens_strtok.c:26 */
 			FREE(argv);
 		}

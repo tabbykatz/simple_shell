@@ -11,6 +11,7 @@ void _cd(char **argv, env_list_t **env)
 	char *home = _getenv_list_value("HOME", env);
 	char **OLDPWD = malloc(sizeof(char *) * 4);
 	char **PWD = malloc(sizeof(char *) * 4);
+	DIR *dir;
 
 	OLDPWD[0] = "";
 	OLDPWD[1] = "OLDPWD";
@@ -23,14 +24,15 @@ void _cd(char **argv, env_list_t **env)
 	getcwd(buf, sizeof(buf));
 	if (argv[1])
 	{
-		DIR* dir = opendir(argv[1]);
-		if (dir) {
+		dir = opendir(argv[1]);
+		if (dir)
+		{
 			closedir(dir);
 			if (_strcmp(argv[1], "~"))
 				chdir(argv[1]);
 			else
 				chdir(home);
-		} 
+		}
 		else
 		{
 			printf("-bash: cd: ");
