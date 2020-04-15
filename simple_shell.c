@@ -25,10 +25,8 @@ int main(void)
 	signal(SIGINT, do_nothing);
 	while (1)
 	{
-		if (isatty(STDIN_FILENO) == 1)
-			printf("ShiP$ ");
+		printf("ShiP$ ");
 		getline_size = getline(&line, &line_size, stdin);
-		line[getline_size - 1] = '\0';
 		if (getline_size == -1)
 		{
 			free(line);
@@ -36,6 +34,7 @@ int main(void)
 			free_ops(ops);
 			return (0);
 		}
+		line[getline_size - 1] = '\0';
 
 		rem_comments(line);
 
