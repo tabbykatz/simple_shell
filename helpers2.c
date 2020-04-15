@@ -67,8 +67,8 @@ char *_strchr(char *s, char c)
 	return (NULL);
 }
 /**
- *   * do_nothing - a dummy function
- *     * @nothing: a dummy integer
- *       */
+ * do_nothing - a dummy function
+ * @nothing: a dummy integer
+ */
 void do_nothing(__attribute__((unused))int nothing)
 {}
