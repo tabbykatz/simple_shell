@@ -74,7 +74,6 @@ int cmd_handler(char **argv, env_list_t **env)
 	if (child_pid == -1)
 	{
 		perror("Error:");
-		double_free(str_env);
 		return (0);
 	}
 	if (child_pid == 0)
@@ -85,5 +84,8 @@ int cmd_handler(char **argv, env_list_t **env)
 	}
 	wait(&status);
 	double_free(str_env);
+	/*
+	free(path_to_file);
+*/
 	return (1);
 }

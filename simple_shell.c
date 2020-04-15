@@ -67,9 +67,7 @@ int main(void)
 			}
 
 			last_return = cmd_handler(argv, env);
-			free(argv);
 		}
-		free(line);
 		free(argvv);
 	}
 	return (0);
