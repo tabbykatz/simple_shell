@@ -16,24 +16,23 @@ char **get_tokens(char *tok_str, char *delim)
 	temp = _strdup(tok_str);
 	if (!temp)
 		return (NULL);
-	token = strtok(temp, delim);
+	token = _strtok(temp, delim);
 	while (token)
 	{
 		count++;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	free(temp);
 	tokens = malloc(sizeof(char *) * (count + 1));
 	if (!tokens)
 		return (NULL);
 
-	token = strtok(tok_str, delim);
+	token = _strtok(tok_str, delim);
 	for (count = 0; token; count++)
 	{
 		tokens[count] = token;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	tokens[count] = NULL;
-
 	return (tokens);
 }
