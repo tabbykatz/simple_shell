@@ -20,17 +20,26 @@ void _cd(char **argv, env_list_t **env)
 	PWD[1] = "PWD";
 	PWD[2] = buf;
 	PWD[3] = NULL;
-
 	getcwd(buf, sizeof(buf));
-
-
-	if (argv[1] && _strcmp(argv[1], "~"))
-		chdir(argv[1]);
+	if (argv[1])
+	{
+		DIR* dir = opendir(argv[1]);
+		if (dir) {
+			closedir(dir);
+			if (_strcmp(argv[1], "~"))
+				chdir(argv[1]);
+			else
+				chdir(home);
+		} 
+		else
+		{
+			printf("-bash: cd: ");
+			printf("%s: No such directory found\n", argv[1]);
+		}
+	}
 	else
 		chdir(home);
-
 	_setenv_list(OLDPWD, env);
-
 	getcwd(buf, sizeof(buf));
 	_setenv_list(PWD, env);
 	free(OLDPWD);
