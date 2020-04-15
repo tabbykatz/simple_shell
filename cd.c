@@ -35,8 +35,12 @@ void _cd(char **argv, env_list_t **env)
 		}
 		else
 		{
-			printf("%s: %d: cd: ", *FNC_NAME, *LINE_COUNT);
-			printf("can't cd to %s\n", argv[1]);
+			_puts(*FNC_NAME);
+			_puts(": ");
+			_puts_int(*LINE_COUNT);
+			_puts(": can't cd to ");
+			_puts(argv[1]);
+			_putchar('\n');
 		}
 	}
 	else

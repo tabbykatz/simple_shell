@@ -56,6 +56,8 @@ char *_strchr(char *s, char c);
 void _puts(char *str);
 void puts_prompt(void);
 int _putchar(char c);
+void _puts_int(int n);
+int MATH_pow(int base, int exp);
 
 /* cmd_handler */
 int cmd_handler(char **argv, env_list_t **env);

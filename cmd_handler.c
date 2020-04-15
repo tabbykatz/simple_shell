@@ -60,7 +60,12 @@ int cmd_handler(char **argv, env_list_t **env)
 	}
 	if (!path_to_file)
 	{
-		printf("%d: %s: not found\n", *LINE_COUNT, argv[0]);
+		_puts(*FNC_NAME);
+		_puts(": ");
+		_puts_int(*LINE_COUNT);
+		_puts(": ");
+		_puts(argv[0]);
+		_puts(" not found\n");
 		double_free(str_env);
 		return (0);
 	}
