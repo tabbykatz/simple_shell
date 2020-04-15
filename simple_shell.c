@@ -1,12 +1,4 @@
 #include "shell.h"
-
-/**
-  * do_nothing - a dummy function
-  * @nothing: a dummy integer
-  */
-void do_nothing(__attribute__((unused))int nothing)
-{}
-
 /**
   * main - entry point
   * Return: 0
