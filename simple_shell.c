@@ -46,20 +46,24 @@ int main(void)
 			}
 
 			argv = get_tokens(argvv[i], " ");
-
-			if (!_strcmp(argv[0], "exit"))
+			if (argv[0])
 			{
-				if (argv[1])
-					exit_status = _atoi(argv[1]);
-				free(line);
-				free_env_list(env);
-				free_ops(ops);
-				free(argvv);
-				free(argv);
-				return (exit_status);
-			}
+				if (!_strcmp(argv[0], "exit"))
+				{
+					if (argv[1])
+						exit_status = _atoi(argv[1]);
+					free(line);
+					free_env_list(env);
+					free_ops(ops);
+					free(argvv);
+					free(argv);
+					return (exit_status);
+				}
 
-			last_return = cmd_handler(argv, env);
+				last_return = cmd_handler(argv, env);
+			}
+			else
+				last_return = 1;
 			/* balance malloc() from get_tokens_strtok.c:26 */
 			FREE(argv);
 		}
