@@ -40,9 +40,10 @@ void printenv_list(env_list_t **env)
 
 	while (i)
 	{
-		printf("%s", i->name);
-		printf("=");
-		printf("%s\n", i->value);
+		_puts(i->name);
+		_puts("=");
+		_puts(i->value);
+		_puts("\n");
 		i = i->next;
 	}
 }
