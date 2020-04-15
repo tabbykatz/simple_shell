@@ -13,7 +13,7 @@
 
 /* this just does in one line: free(x); x = NULL; */
 #define FREE(x) (x = (free(x), NULL))
-
+#define PROMPT "Ship$ "
 /* structs */
 /**
   * struct order - struct to contain &&'s and ||'s
@@ -53,6 +53,8 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strtok(char *input, char *delim);
 char *_strchr(char *s, char c);
+void _puts(char *str);
+void puts_prompt(void);
 
 /* cmd_handler */
 int cmd_handler(char **argv, env_list_t **env);
