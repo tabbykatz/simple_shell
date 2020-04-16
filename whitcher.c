@@ -14,7 +14,7 @@ char *whitcher(char *cmd, env_list_t **env)
 	char **tokens;
 	int i;
 
-	if (PATH)
+	if (!PATH)
 		return (NULL);
 	PATH_COPY = _strdup(PATH);
 	tokens = get_tokens(PATH_COPY, ":");
