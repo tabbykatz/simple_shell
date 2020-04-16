@@ -39,18 +39,10 @@ int main(__attribute__((unused))int ac, char **av)
 
 		*ops = NULL;
 		argvv = _get_cmds(line, ops);
+		
 		a = *ops;
 		for (i = 0; argvv[i]; i++)
 		{
-			if (a)
-			{
-				if (!last_return || a->n == 3)
-				{
-					i++;
-					a = a->next;
-				}
-			}
-
 			argv = get_tokens(argvv[i], " ");
 			if (argv[0])
 			{
@@ -73,6 +65,18 @@ int main(__attribute__((unused))int ac, char **av)
 			*LINE_COUNT += 1;
 			/* balance malloc() from get_tokens_strtok.c:26 */
 			FREE(argv);
+			if (a)
+			{
+				if (last_return && a->n == 3)
+				{
+					i++;
+				}
+				if (!last_return && a->n == 2)
+				{
+					i++;
+				}
+				a = a->next;
+			}
 		}
 		free(argvv);
 	}
