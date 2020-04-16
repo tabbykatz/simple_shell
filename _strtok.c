@@ -1,48 +1,48 @@
 #include "shell.h"
-
 /**
- * _strtok - tokenizes a string
- * @input: the string to tokenize
- * @delim: where to divide tokens (" ")
- * Return: pointer to token
+ * _strtok - tokenizes the str
+ * @buffer: the string
+ * @delim: the dividing char
+ * Return: char * to token or NULL
  */
-char *_strtok(char *input, char *delim)
+char *_strtok(char *buffer, const char *delim)
 {
-	static char *begin;
-	static char *prevNull;
-	char *token = NULL;
-	int i;
+	static char *sp;
+	char *p;
+	int letter = 0;
+	int i = 0;
+	int stop = 0;
 
-	if (input)
-		begin = input;
-	if (!begin)
-		return (NULL);
-	if (*begin == '\0')
+	if (buffer)
+		sp = buffer;
+	p = sp;
+	while (sp && *sp)
 	{
-		if (begin == prevNull)
+		while (delim[i])
 		{
-			begin = NULL;
-			return (NULL);
-		}
-		prevNull = begin;
-		return (begin);
-	}
-	token = begin;
-	while (*begin)
-	{
-		for (i = 0; delim[i]; i++)
-		{
-			if (*begin == delim[i])
+			if (*sp == delim[i] && letter == 0)
 			{
-				*begin = '\0';
-				prevNull = begin;
-				if (*(begin + 1) != '\0')
-					begin++;
-				return (token);
+				++p;
+				++sp;
+				i = 0;
+				continue;
 			}
+			if (*sp == delim[i] && letter == 1)
+			{
+				*sp++ = '\0';
+				stop = 1;
+				i = 0;
+				break;
+			}
+			++i;
 		}
-		begin++;
+		if (stop)
+			break;
+		letter = 1;
+		i = 0;
+		++sp;
 	}
-	prevNull = begin;
-	return (token);
+	if (!p || *p == '\0')
+		return (NULL);
+	return (p);
 }
