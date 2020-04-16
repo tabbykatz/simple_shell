@@ -51,7 +51,7 @@ char *_strdup(char *str);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
-char *_strtok(char *input, char *delim);
+char *_strtok(char *buffer, const char *delim);
 char *_strchr(char *s, char c);
 void _puts(char *str);
 void puts_prompt(void);
