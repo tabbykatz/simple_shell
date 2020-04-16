@@ -62,7 +62,7 @@ int MATH_pow(int base, int exp);
 /* cmd_handler */
 int cmd_handler(char **argv, env_list_t **env);
 void built_in_handler(char **argv, env_list_t **env, int i);
-void _cd(char **argv, env_list_t **env);
+int _cd(char **argv, env_list_t **env);
 void do_nothing(int nothing);
 
 /* cmd assembly */

@@ -5,10 +5,11 @@
   * @argv: argument vector
   * @env: environment linked list
   */
-void _cd(char **argv, env_list_t **env)
+int _cd(char **argv, env_list_t **env)
 {
 	char buf[BUFSIZ]; /* BUFSIZ is predefined~8k */
 	char *home = _getenv_list_value("HOME", env);
+	char *old = _getenv_list_value("OLDPWD", env);
 	char **OLDPWD = malloc(sizeof(char *) * 4);
 	char **PWD = malloc(sizeof(char *) * 4);
 	DIR *dir;
@@ -28,10 +29,26 @@ void _cd(char **argv, env_list_t **env)
 		if (dir)
 		{
 			closedir(dir);
-			if (_strcmp(argv[1], "~"))
-				chdir(argv[1]);
+			chdir(argv[1]);
+		}
+		else if (!_strcmp(argv[1], "~"))
+			chdir(home);
+		else if (!_strcmp(argv[1], "-"))
+		{
+			if (!old)
+			{
+				_puts(*FNC_NAME);
+				_puts(": ");
+				_puts_int(*LINE_COUNT);
+				_puts(": can't cd to ");
+				_puts(argv[1]);
+				_putchar('\n');
+				free(OLDPWD);
+				free(PWD);
+				return (1);
+			}
 			else
-				chdir(home);
+				chdir(old);
 		}
 		else
 		{
@@ -41,6 +58,9 @@ void _cd(char **argv, env_list_t **env)
 			_puts(": can't cd to ");
 			_puts(argv[1]);
 			_putchar('\n');
+			free(OLDPWD);
+			free(PWD);
+			return (1);
 		}
 	}
 	else
@@ -50,4 +70,5 @@ void _cd(char **argv, env_list_t **env)
 	_setenv_list(PWD, env);
 	free(OLDPWD);
 	free(PWD);
+	return (0);
 }
