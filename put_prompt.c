@@ -36,14 +36,14 @@ int _putchar(char c)
 
 /**
   * _puts_int - writes an integer
-  * @n - integer
+  * @n: integer
   */
 void _puts_int(int n)
 {
 	unsigned int length = 1, i;
 	int temp_n = n;
 
-	while (temp_n/10)
+	while (temp_n / 10)
 	{
 		length++;
 		temp_n /= 10;
@@ -64,7 +64,7 @@ void _puts_int(int n)
 int MATH_pow(int base, int exp)
 {
 	int retint = 1;
-	
+
 	while (exp > 0)
 	{
 		retint *= base;
