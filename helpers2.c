@@ -71,4 +71,7 @@ char *_strchr(char *s, char c)
  * @nothing: a dummy integer
  */
 void do_nothing(__attribute__((unused))int nothing)
-{}
+{
+	_putchar('\n');
+	puts_prompt();
+}
