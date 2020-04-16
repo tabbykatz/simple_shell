@@ -33,7 +33,9 @@ int main(__attribute__((unused))int ac, char **av)
 			free(line);
 			free_env_list(env);
 			free_ops(ops);
-			return (0);
+			if (isatty(STDIN_FILENO) == 1)
+				_putchar('\n');
+			return (last_return);
 		}
 		line[getline_size - 1] = '\0';
 
