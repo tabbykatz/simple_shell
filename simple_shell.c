@@ -6,11 +6,13 @@ char *fnc_name;
 char **FNC_NAME = &fnc_name;
 /**
   * main - entry point
+  * @ac: arg count
+  * @av: arg vector
   * Return: 0
   */
 int main(__attribute__((unused))int ac, char **av)
 {
-	int exit_status = 0, last_return = 1, i;
+	int exit_status = 0, last_return = 0, i;
 	size_t line_size = 0;
 	ssize_t getline_size;
 	char **argv, *line = NULL, **argvv;
@@ -39,7 +41,7 @@ int main(__attribute__((unused))int ac, char **av)
 
 		*ops = NULL;
 		argvv = _get_cmds(line, ops);
-		
+
 		a = *ops;
 		for (i = 0; argvv[i]; i++)
 		{
@@ -50,28 +52,30 @@ int main(__attribute__((unused))int ac, char **av)
 				{
 					if (argv[1])
 						exit_status = _atoi(argv[1]);
+					else
+						exit_status = last_return;
 					free(line);
 					free_env_list(env);
 					free_ops(ops);
 					free(argvv);
 					free(argv);
-					return (exit_status);
+					exit(exit_status);
 				}
 
 				last_return = cmd_handler(argv, env);
 			}
 			else
-				last_return = 1;
+				last_return = 0;
 			*LINE_COUNT += 1;
 			/* balance malloc() from get_tokens_strtok.c:26 */
 			FREE(argv);
 			if (a)
 			{
-				if (last_return && a->n == 3)
+				if (!last_return && a->n == 3)
 				{
 					i++;
 				}
-				if (!last_return && a->n == 2)
+				if (last_return && a->n == 2)
 				{
 					i++;
 				}

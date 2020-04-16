@@ -32,7 +32,7 @@ void built_in_handler(char **argv, env_list_t **env, int i)
 int cmd_handler(char **argv, env_list_t **env)
 {
 	char *built_ins[] = {"cd", "setenv", "unsetenv", "env", NULL};
-	int i, status;
+	int i, status, wexitstatus_ret;
 	struct stat st;
 	char *path_to_file = NULL;
 	pid_t child_pid;
@@ -52,7 +52,7 @@ int cmd_handler(char **argv, env_list_t **env)
 	else
 	{
 		path_to_file = whitcher(argv[0], env);
-		if (path_to_file && _strcmp(path_to_file, _getenv_list_value("PATH", env)))
+		if (path_to_file)
 		{
 			path_to_file = _strcat(path_to_file, "/");
 			path_to_file = _strcat(path_to_file, argv[0]);
@@ -67,7 +67,7 @@ int cmd_handler(char **argv, env_list_t **env)
 		_puts(argv[0]);
 		_puts(" not found\n");
 		double_free(str_env);
-		return (0);
+		return (127);
 	}
 	child_pid = fork();
 	if (child_pid == -1)
@@ -82,6 +82,7 @@ int cmd_handler(char **argv, env_list_t **env)
 		exit(0);
 	}
 	wait(&status);
+	wexitstatus_ret = WEXITSTATUS(status);
 	double_free(str_env);
-	return (1);
+	return (wexitstatus_ret);
 }

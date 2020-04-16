@@ -4,16 +4,19 @@
   * whitcher - locates cmd's in the PATH
   * @cmd: char * containing the cmd
   * @env: environment linked list
-  * Return: dir file is in or full path (change this to NULL
+  * Return: dir file is in or NULL
   */
 char *whitcher(char *cmd, env_list_t **env)
 {
 	char *PATH = _getenv_list_value("PATH", env);
-	char *PATH_COPY = _strdup(PATH);
+	char *PATH_COPY;
 	static char buf[256];
 	char **tokens;
 	int i;
 
+	if (PATH)
+		return (NULL);
+	PATH_COPY = _strdup(PATH);
 	tokens = get_tokens(PATH_COPY, ":");
 
 	for (i = 0; tokens[i]; i++)
