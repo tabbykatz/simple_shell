@@ -36,7 +36,7 @@ char *_strtok(char *buffer, const char *delim)
 			}
 			++i;
 		}
-		if (stop)
+		if (stop || !*sp)
 			break;
 		letter = 1;
 		i = 0;
