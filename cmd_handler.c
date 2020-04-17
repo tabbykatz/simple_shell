@@ -5,13 +5,12 @@
   * @env: environment linked list
   * @i: switch for built-ins
   */
-void built_in_handler(char **argv, env_list_t **env, int i)
+int built_in_handler(char **argv, env_list_t **env, int i)
 {
 	switch (i)
 	{
 		case 0:
-			_cd(argv, env);
-			break;
+			return(_cd(argv, env));
 		case 1:
 			_setenv_list(argv, env);
 			break;
@@ -22,6 +21,7 @@ void built_in_handler(char **argv, env_list_t **env, int i)
 			printenv_list(env);
 			break;
 	}
+	return (0);
 }
 /**
   * cmd_handler - handles all commands
@@ -32,7 +32,7 @@ void built_in_handler(char **argv, env_list_t **env, int i)
 int cmd_handler(char **argv, env_list_t **env)
 {
 	char *built_ins[] = {"cd", "setenv", "unsetenv", "env", NULL};
-	int i, status, wexitstatus_ret;
+	int i, status, exit_value = 0;
 	struct stat st;
 	char *path_to_file = NULL;
 	pid_t child_pid;
@@ -42,9 +42,9 @@ int cmd_handler(char **argv, env_list_t **env)
 	{
 		if (!_strcmp(built_ins[i], argv[0]))
 		{
-			built_in_handler(argv, env, i);
+			exit_value = built_in_handler(argv, env, i);
 			double_free(str_env);
-			return (1);
+			return (exit_value);
 		}
 	}
 	if (stat(argv[0], &st) == 0)
@@ -82,7 +82,7 @@ int cmd_handler(char **argv, env_list_t **env)
 		exit(0);
 	}
 	wait(&status);
-	wexitstatus_ret = WEXITSTATUS(status);
+	exit_value = WEXITSTATUS(status);
 	double_free(str_env);
-	return (wexitstatus_ret);
+	return (exit_value);
 }
